@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        int targetNumber = 25;  // Set the target number to 25
+        int maxAttempts = 5;
+        int score = 0;
+
+        Scanner scanner = new Scanner(System.in);
+        boolean playAgain = true;
+
+        while (playAgain) {
+            System.out.println("Guess the number: ");
+
+            int attemptCount = 0;
+            boolean guessedCorrectly = false;
+
+            while (attemptCount < maxAttempts && !guessedCorrectly) {
+                System.out.print("Enter your guess: ");
+                int guess = scanner.nextInt();
+
+                if (guess == targetNumber) {
+                    System.out.println("Congratulations! You guessed the number correctly.");
+                    guessedCorrectly = true;
+                    score += maxAttempts - attemptCount;
+                } else if (guess < targetNumber) {
+                    System.out.println("The number is higher than your guess.");
+                } else {
+                    System.out.println("The number is lower than your guess.");
+                }
+
+                attemptCount++;
+            }
+
+            if (!guessedCorrectly) {
+                System.out.println("Oops! You ran out of attempts. The number was: " + targetNumber);
+            }
+
+            System.out.println("Your score: " + score);
+            System.out.print("Do you want to play again? (Y/N): ");
+            String playAgainChoice = scanner.next();
+
+            if (!playAgainChoice.equalsIgnoreCase("Y")) {
+                playAgain = false;
+            }
+        }
+
+        scanner.close();
+    }
+}
